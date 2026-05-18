@@ -1,13 +1,17 @@
 import express from 'express'
+import userRouter from './routers/user.router.js'
 
 const app=express()
 
 
 
-app.use('/',(req,res)=>{
-    res.send('Hey Man ')
+app.use('/api/user',userRouter)
+
+
+app.use((err,req,res,next)=>{
+    console.log(err);
+    
 })
 
 
-
-export default app
+export default app;
