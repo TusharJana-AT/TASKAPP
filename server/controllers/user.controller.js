@@ -30,3 +30,11 @@ export const login=async(req,res,next)=>{
         next(error)
     }
 }
+
+export const getCurrentUser=async(req,res,next)=>{
+    try {
+        
+    } catch (error) {
+        next(error)
+    }
+}
