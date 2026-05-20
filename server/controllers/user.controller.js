@@ -1,5 +1,5 @@
 import { messages } from "../messages/index.js";
-import { loginUser, registerUser } from "../services/user.service.js";
+import { getUser, loginUser, registerUser } from "../services/user.service.js";
 import { response } from "../utils/response.util.js";
 
 
@@ -33,7 +33,15 @@ export const login=async(req,res,next)=>{
 
 export const getCurrentUser=async(req,res,next)=>{
     try {
+        const userId=req.user.id
+        // console.log("YOLO ",userId);
         
+        const data=await getUser({userId})
+
+        return response(res,{
+            statusCode:200,
+            data
+        })
     } catch (error) {
         next(error)
     }

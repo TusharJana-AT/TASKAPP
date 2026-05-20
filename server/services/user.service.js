@@ -45,3 +45,17 @@ export const loginUser = async ({ email, password }) => {
 
   return { user: userData, token };
 };
+
+
+export const getUser=async({userId})=>{
+  const user = await User.findOne({where:{id:userId}})
+
+      //  console.log("YOLO ",userId);
+  if(!user){
+    const err=new Error('No User Found')
+    err.statusCode=400
+    throw err
+  }
+
+  return user
+}

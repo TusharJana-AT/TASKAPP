@@ -18,8 +18,8 @@ const Task=sequelize.define('Task',{
         allowNull:false,
     },
     status:{
-        type:DataTypes.ENUM('Pending','In Progress','Completed'),
-        defaultValue:'Pending'
+        type:DataTypes.ENUM('pending','in-progress','completed'),
+        defaultValue:'pending'
     },
     dueDate:{
         type:DataTypes.DATEONLY

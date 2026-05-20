@@ -58,14 +58,42 @@ export const updateTask = async ({
   return editedTask;
 };
 
+export const fetchTasks = async ({
+  userId,
+  page = 1,
+  limit = 5,
+  status,
+}) => {
+  const offset = (page - 1) * limit;
 
-export const getData = async({userId})=>{
-    const data=await Task.findAll({where:{userId}})
-    if(!data){
-        const err=new Error(messages.general.DATA_NOT_FOUND)
-        err.statusCode=400
-        throw err
-    }
+  const where = { userId };
 
-    return data
-}
+  if (status) {
+    where.status = status;
+  }
+
+  const { rows, count } = await Task.findAndCountAll({
+    where,
+    limit: Number(limit),
+    offset: Number(offset),
+    order: [["createdAt", "DESC"]],
+  });
+
+  return {
+    tasks: rows,
+    totalTasks: count,
+    currentPage: Number(page),
+    totalPages: Math.ceil(count / limit),
+  };
+};
+
+export const fetchSingleTask = async ({ taskId }) => {
+  const data = await Task.findOne({where:{id:taskId}})
+  if(!data) {
+    const err=new Error(messages.task.TASK_NOTFOUNT)
+    err.statusCode=400
+    throw err
+  }
+  return data
+
+};

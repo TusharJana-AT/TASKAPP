@@ -14,6 +14,11 @@ export const editTask=(data,taskId)=>{
     return api.put(`/task/editTask/${taskId}`,data)
 }
 
-export const getTask=()=>{
-    return api.get('/task/getTask')
+export const getTask = (params) => {
+  return api.get("/task/getTask", {
+    params,
+  });
+};
+export const getSingleTask = (taskId)=>{
+    return api.get(`/task/getSingleTask/${taskId}`)
 }
