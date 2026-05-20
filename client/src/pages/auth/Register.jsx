@@ -33,7 +33,7 @@ function Register() {
 
     const onSubmit = async(data) => {
         try {
-            const res = await registerUser(datax);
+            const res = await registerUser(data);
             login(res.data.data);
 
             reset()
@@ -42,8 +42,6 @@ function Register() {
             console.log(error);
         }
     }
-
-
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
