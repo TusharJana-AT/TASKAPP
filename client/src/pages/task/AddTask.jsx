@@ -5,27 +5,8 @@ import { addTask } from "../../api/taskAPI";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { addTaskSchema } from "../../validations/auth.validation";
 
-export const addTaskSchema = z.object({
-  title: z.string().min(3, "Title must be at least 3 characters"),
-
-  description: z.string().min(5, "Description must be at least 5 characters"),
-
-
-  dueDate: z.coerce.date().refine(
-    (date) => {
-      const today = new Date();
-
-      today.setHours(0, 0, 0, 0);
-
-      return date >= today;
-    },
-    {
-      message: "Past dates are not allowed",
-    },
-  ),
-});
 
 function AddTask() {
   const navigate = useNavigate();

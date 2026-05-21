@@ -81,8 +81,8 @@ export const fetchTasks = async ({
 
   return {
     tasks: rows,
-    totalTasks: count,
-    currentPage: Number(page),
+    // totalTasks: count,
+    // currentPage: Number(page),
     totalPages: Math.ceil(count / limit),
   };
 };
